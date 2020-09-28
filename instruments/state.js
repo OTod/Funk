@@ -25,8 +25,7 @@ function renderRecurcively(parentNode, childNode) {
     if (Object.keys(childNode.events).length) {
         for (let eventHandler in childNode.events) {
             el.addEventListener(eventHandler, () => {
-                const modifiedVDom = childNode.events[eventHandler]();
-                render(modifiedVDom);
+                childNode.events[eventHandler]();
             });
         }
     }
@@ -45,4 +44,10 @@ function renderRecurcively(parentNode, childNode) {
     }
     childNode.rendered = true;
     return el;
+}
+
+// todo: check and refactor
+function triggerStateChange(vDom) {
+    debugger;
+    render(vDom);
 }

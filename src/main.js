@@ -15,14 +15,15 @@ function main(vDomInitialized) {
 function addMessage(vDom, params) {
     vDom = Object.assign({}, vDom);
 
-    // let holder = getVDomNodeById(vDom, params.parentId);
-    let { holder } = params;
+    let holder = getVDomNodeById(vDom, params.parentId);
     let message = createElement('span');
 
     message = addInnerText(message, 'Additional message');
     vDom = addChild(vDom, holder, message);
 
-    return vDom;
+    //! flaws: does it would be bette if it would restart whole pipe of functions again
+    triggerStateChange(vDom);
+    // return vDom;
 }
 
 function createInnerText(vDom) {
@@ -42,7 +43,7 @@ function createButton(vDom) {
         ),
         {
             click: addMessage.bind(null, vDom, {
-                holder: getVDomNodeById(vDom, '__elemId_0'),
+                parentId: '__elemId_0',
             }),
         }
     );

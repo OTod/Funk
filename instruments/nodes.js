@@ -1,12 +1,3 @@
-// all of these functions should work wit virtual dom - virtual dom Nodes only
-
-function addEventHandler(vDomNode, eventsObject) {
-    // ? seems unnecessary, can be replaced by simple object assign
-    Object.assign(vDomNode.events, eventsObject);
-
-    return vDomNode;
-}
-
 function getVDomNodeById(vDom, id) {
     let vDomNode;
     if (vDom.id === id) {
@@ -19,27 +10,28 @@ function getVDomNodeById(vDom, id) {
     return vDomNode;
 }
 
-function addClass(vDomNode, classArray) {
-    // ! does two operations
-    vDomNode.classes.push(classArray);
+function addEventHandler(vDomNode, eventsObject) {
+    Object.assign(vDomNode.events, eventsObject);
+    return vDomNode;
+}
 
+function addClass(vDomNode, classArray) {
+    // ! does two operations - rendered state change to be removed after hash implementation
+    vDomNode.classes.push(classArray);
     vDomNode.rendered = false;
     return vDomNode;
 }
 
 function addInnerText(vDomNode, text) {
-    debugger;
-    //!does two operations
+    // ! does two operations - rendered state change to be removed after hash implementation
     vDomNode.innerText = text;
-    setUnrendered(vDomNode);
-    // vDomNode.rendered = false;
+    vDomNode.rendered = false;
     return vDomNode;
 }
 
 function addChild(vDom, parentVNode, childNode) {
     parentVNode.children[childNode.id] = childNode;
-    // childNode.parentId = parentNode.id;
-    childNode.parent = parentVNode;
+    childNode.parentId = parentVNode.id;
     parentVNode.rendered = false;
     console.log(parentVNode);
     return parentVNode;
@@ -50,7 +42,7 @@ function createElement(tag) {
     debugger;
     return {
         id,
-        parent: undefined,
+        parentId: '',
         tag,
         children: [],
         classes: [],
@@ -58,11 +50,6 @@ function createElement(tag) {
         innerText: '',
         rendered: false,
     };
-}
-
-function setUnrendered(vNode) {
-    vNode.rendered = false;
-    return vNode;
 }
 
 // !keeps state
