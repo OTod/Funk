@@ -1,33 +1,17 @@
 function main(vDomInitialized) {
     let vDom = Object.assign({}, vDomInitialized);
+    let arr = [createInnerText, createButton];
 
-    let el = createElement('div');
-    el = addInnerText(el, 'innerText');
-    el = addClass(el, ['element']);
-
-    vDom = addChild(vDom, vDom, el);
-
-    // let button = createElement('button');
-    // button = addInnerText(button, 'clickMe');
-    // button = addClass(button, 'buttonElement');
-    // button = addEventHandler(button, {
-    //     click: addMessage.bind(null, vDom, { holder: el }),
-    // });
-
-    el = addChild(vDom, el, button);
-
-    let arr = [];
-
-    arr.reduce((vDomAcc, vDomChangingFunction) => {
+    vDomOutput = arr.reduce((vDomAcc, vDomChangingFunction) => {
         //add some condition based on vDomChangingFunction necessity to be performed - if not, then do nothing (return vDomAcc)
         debugger;
         return vDomChangingFunction(vDomAcc);
-    });
+    }, vDom);
 
-    return vDom;
+    return vDomOutput;
 }
 
-// dirty function
+// dirty function - event listener
 function addMessage(vDom, params) {
     vDom = Object.assign({}, vDom);
 
@@ -38,5 +22,30 @@ function addMessage(vDom, params) {
     message = addInnerText(message, 'Additional message');
     vDom = addChild(vDom, holder, message);
 
+    return vDom;
+}
+
+function createInnerText(vDom) {
+    vDom = addChild(
+        vDom,
+        vDom,
+        addClass(addInnerText(createElement('div'), 'innerText'), ['element'])
+    );
+    return vDom;
+}
+
+function createButton(vDom) {
+    button = addEventHandler(
+        addClass(
+            addInnerText(createElement('button'), 'clickMe'),
+            'buttonElement'
+        ),
+        {
+            click: addMessage.bind(null, vDom, {
+                holder: getVDomNodeById(vDom, '__elemId_0'),
+            }),
+        }
+    );
+    vDom = addChild(vDom, getVDomNodeById(vDom, '__elemId_0'), button);
     return vDom;
 }
