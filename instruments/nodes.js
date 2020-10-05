@@ -39,8 +39,7 @@ function addChild(vDom, parentVNode, childNode) {
 
 function createElement(tag) {
     let id = gen.next().value;
-    debugger;
-    return {
+    let el = {
         id,
         parentId: '',
         tag,
@@ -50,6 +49,10 @@ function createElement(tag) {
         innerText: '',
         rendered: false,
     };
+    store(el);
+    debugger;
+
+    return el;
 }
 
 // !keeps state
