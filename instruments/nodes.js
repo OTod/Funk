@@ -49,8 +49,7 @@ function createElement(tag) {
         innerText: '',
         rendered: false,
     };
-    store(el);
-    debugger;
+    // store(el);
 
     return el;
 }
