@@ -50,43 +50,20 @@ function createButton(vDom) {
     return vDom;
 }
 
-let obj = JSON.parse(`{
-    "_id": "5f832d8dcfc6a25e74bdf23c",
-    "index": 0,
-    "phone": "+1 (978) 531-2723",
-    "address": "594 Bowery Street, Wilsonia, Oklahoma, 9781",
-    "registered": "2014-01-05T04:17:39 -02:00",
-    "latitude": 60.210296,
-    "longitude": 146.708432,
-    "friends": 
-      {
-        "id": 0,
-        "name": "Sharlene Mills",
-        "children": {
-          "id1": {
-            "name": "Henrietta"
-          },
-          "id2": {
-            "name": "Judith"
-          }
-        }
-      }
-    ,
-    "greeting": "Hello, undefined! You have 7 unread messages.",
-    "favoriteFruit": "strawberry"
-  }`);
-
 function draft() {
-    let obj = {
-        key: 'testValue',
-    };
-    let obj2 = {
-        asd: 'e',
-        foo: 'bar',
-    };
     let obj3 = {
         asd: 'e',
         foo: 'bar',
+        nest: {
+            key: ' value',
+            deepNest: {
+                key: 'val2',
+                deeperNest: {
+                    name: 'John',
+                    surname: 'Doe',
+                },
+            },
+        },
         test: { qwerty: 123 },
         baz: {
             key: 'value',
@@ -97,20 +74,18 @@ function draft() {
     };
 
     let pers3 = new PersistentObject(obj3);
-    let big = new PersistentObject(obj);
-    console.log(big);
     // pers.setData(obj2);
-    let val = big.getValue();
+    let val = pers3.getValue();
     console.log(val);
 
-    debugger;
-    console.time('change');
-    big.change(['friends', 'name'], 'updatedValue');
-    console.timeEnd('change');
+    // debugger;
+    // console.time('change');
+    pers3.change(['nest', 'deepNest', 'deeperNest', 'name'], 'updatedValue');
+    // console.timeEnd('change');
 
-    console.time('incorporation');
-    big.incorporateChanges(obj3);
-    console.timeEnd('incorporation');
+    // console.time('incorporation');
+    // big.incorporateChanges(obj3);
+    // console.timeEnd('incorporation');
 
     debugger;
     // console.log(pers);
