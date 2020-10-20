@@ -73,22 +73,34 @@ function draft() {
         },
     };
 
-    let pers3 = new PersistentObject(obj3);
-    // pers.setData(obj2);
-    let val = pers3.getValue();
-    console.log(val);
+    // let pers3 = new PersistentObject(obj3);
+    // let pers2 = new PersistentObject(obj3);
 
-    // debugger;
-    // console.time('change');
-    pers3.change(['nest', 'deepNest', 'deeperNest', 'name'], 'updatedValue');
+    // pers.setData(obj2);
+    // let val = pers3.getValue();
+    // console.log(val);
+
+    // pers3.change(['nest', 'deepNest', 'deeperNest', 'name'], 'updatedValue');
     // console.timeEnd('change');
 
-    // console.time('incorporation');
-    // big.incorporateChanges(obj3);
-    // console.timeEnd('incorporation');
-
+    // console.log(to);
     debugger;
     // console.log(pers);
+    let to32 = getObject(3, 2); //depth = 3 q-ty = 2
+    let to64 = getObject(8, 6);
+    // let to106 = getObject(10, 6);
+
+    console.time('32');
+    let pers32 = new PersistentObject(to32);
+    console.timeEnd('32');
+
+    console.time('64');
+    let pers64 = new PersistentObject(to64);
+    console.timeEnd('64');
+
+    // console.time('106');
+    // let pers106 = new PersistentObject(to106);
+    // console.timeEnd('106');
 }
 
 draft();
