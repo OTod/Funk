@@ -87,20 +87,29 @@ function draft() {
     debugger;
     // console.log(pers);
     let to32 = getObject(3, 2); //depth = 3 q-ty = 2
-    let to64 = getObject(8, 6);
-    // let to106 = getObject(10, 6);
+    let to86 = getObject(8, 6);
+    let to106 = getObject(10, 6);
+    let to2020 = getObject(20, 20);
 
-    console.time('32');
-    let pers32 = new PersistentObject(to32);
-    console.timeEnd('32');
+    // console.log(to86);
+
+    // console.time('32');
+    // let pers32 = new PersistentObject(to32);
+    // console.timeEnd('32');
+    console.time('2020');
+    let pers2020 = new PersistentObject(to2020);
+    let value2020 = pers2020.getValue();
+    console.timeEnd('2020');
 
     console.time('64');
-    let pers64 = new PersistentObject(to64);
+    let pers86 = new PersistentObject(to86);
     console.timeEnd('64');
 
-    // console.time('106');
-    // let pers106 = new PersistentObject(to106);
-    // console.timeEnd('106');
+    console.time('106');
+    let pers106 = new PersistentObject(to106);
+    console.timeEnd('106');
+
+    debugger;
 }
 
 draft();

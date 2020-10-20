@@ -18,16 +18,20 @@
 //     });
 // }
 
-function getObject(nestingDepth, quantityPerLevel) {
-    let obj = {};
-    for (let i = 1; i <= quantityPerLevel; i++) {
-        obj['key' + i] = 'value' + i;
-        let value =
-            nestingDepth > 1
-                ? getObject(nestingDepth - 1, quantityPerLevel)
-                : { finalKey: 'finalValue' };
-        obj['nested' + i + '_level' + nestingDepth] = value;
+function getObject(nestingDepth, quantityPerLevel, initialObj = {}) {
+    obj = createNObjects(initialObj, quantityPerLevel);
+    if (nestingDepth > 0) {
+        obj = getObject(nestingDepth - 1, quantityPerLevel, {
+            ['nesting' + nestingDepth]: obj,
+        });
     }
+    return obj;
+}
 
+function createNObjects(obj, n) {
+    while (n > 0) {
+        obj['key' + n] = 'value' + n;
+        n--;
+    }
     return obj;
 }
