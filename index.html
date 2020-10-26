@@ -4,17 +4,20 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <script src="./instruments//persistent.js"></script>
-        <script src="./dev/mockedApi.js"></script>
 
-        <script src="./instruments/state.js"></script>
-        <script src="./instruments/nodes.js"></script>
-        <script src="./instruments/library.js"></script>
-        <script src="./instruments//persistentObject.js"></script>
-        <script src="./src/main.js"></script>
-        <script src="./dev/mockedApi.js"></script>
-
-        <script src="index.js"></script>
+        <script src="./scripts/require.js"></script>
+        <script>
+            require.config({
+                baseUrl: './scripts',
+                waitSeconds: 15,
+            });
+            require(['./scripts/main.js', 'instruments/vDom/vDom'], function(
+                main,
+                vDom
+            ) {
+                vDom.render(main(vDom.initialize()));
+            });
+        </script>
         <title>Document</title>
     </head>
     <body></body>
