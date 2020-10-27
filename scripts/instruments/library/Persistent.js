@@ -8,7 +8,7 @@ define(['instruments/library/library'], function({
         let dictionary = getDictionary();
         for (let entity in object) {
             if (typeof object[entity] === 'object') {
-                object[entity] = dictionary[transform(object[entity])]; // todo: change access to dictionary - seems weird
+                object[entity] = dictionary[transform(object[entity])];
             }
         }
         return store(object);
@@ -20,9 +20,6 @@ define(['instruments/library/library'], function({
         },
         make(object) {
             const hashKey = transform(object);
-            // this.hashKey = hashKey;
-            // addVersion(hashKey);
-
             return {
                 hashKey,
                 versions: [hashKey],

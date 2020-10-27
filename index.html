@@ -9,6 +9,11 @@
         <script>
             require.config({
                 baseUrl: './scripts',
+                paths: {
+                    components: './components',
+                    library: './instruments/library',
+                    vDom: './instruments/vDom',
+                },
                 waitSeconds: 15,
             });
             require(['./scripts/main.js', 'instruments/vDom/vDom'], function(

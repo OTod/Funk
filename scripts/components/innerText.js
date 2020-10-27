@@ -1,17 +1,9 @@
-define(['instruments/vDom/nodes'], function({
-    addClass,
-    addInnerText,
-    addChild,
-    createElement,
-}) {
+define(['instruments/vDom/NodesOperations'], function({ createElement }) {
     return function createInnerText(vDom) {
-        vDom = addChild(
-            vDom,
-            vDom,
-            addClass(addInnerText(createElement('div'), 'sample text'), [
-                'element',
-            ])
-        );
+        let el = createElement('div');
+        el.classes.push('element');
+        el.innerText = 'sample text';
+        vDom.children.set(el.id, el);
         return vDom;
     };
 });
