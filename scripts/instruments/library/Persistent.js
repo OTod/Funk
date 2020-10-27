@@ -4,11 +4,19 @@ define(['instruments/library/library'], function({
     change,
     getDictionary,
 }) {
+    let dictionary = getDictionary();
     let transform = function(object) {
-        let dictionary = getDictionary();
-        for (let entity in object) {
-            if (typeof object[entity] === 'object') {
-                object[entity] = dictionary[transform(object[entity])];
+        if (object instanceof Map) {
+            for (var [key, value] of object) {
+                if (typeof value === 'object') {
+                    object.set(key, dictionary[transform(value)]);
+                }
+            }
+        } else {
+            for (let entity in object) {
+                if (typeof object[entity] === 'object') {
+                    object[entity] = dictionary[transform(object[entity])];
+                }
             }
         }
         return store(object);
